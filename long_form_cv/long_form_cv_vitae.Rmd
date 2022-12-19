@@ -1,26 +1,25 @@
 ---
 title: CV
-name: Tinashe Michael
-surname: Tapera
-position: "PhD Student in Personal Health Informatics"
-address: "Northeastern University, Boston, MA"
-phone: +267 441 7206
-www: tinashemtapera.com
-email: "tinashemtapera@gmail.com"
-twitter: TaperaTinashe
-github: TinasheMTapera
-linkedin: TinasheMTapera
+name: Brandon P.
+surname: Labbree
+position: "Research Technician Associate"
+address: "University of Michigan, Ann Arbor, MA"
+phone: +856 761 7029
+email: "blabbree@umich.edu"
+twitter: blabbree
+github: blabbree
+linkedin: blabbree
+orcid: "0000-0002-5893-4469"
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: "000000"
 aboutme: "I’m a PhD Student at Northeastern University, co-mentored by Varun Mishra and Stephen Intille. I study how to detect and intervene on mental health crises from personal devices like mobile phones and smart watches."
 output: 
   vitae::awesomecv
 params:
-  googlescholarid: 9N6a5jsAAAAJ
+  googlescholarid: WuRKHzAAAAAJ
 ---
 
 <!-- major acknowledgement to https://github.com/seabbs/cv -->
-
 
 ```{r setup, include=FALSE}
 
@@ -43,7 +42,7 @@ scholarid <- params$googlescholarid
 ```{r get data, include=FALSE}
 #### read in your google sheets data for things like:
 #### jobs, projects, research, zenodo dois, skills
-read_subsheet <- function(subsh, sh="https://docs.google.com/spreadsheets/d/1yLCNgRFi0AezvyTT2Uaof2FKzNImuy2_xIlGKn77TNw/edit?usp=sharing"){
+read_subsheet <- function(subsh, sh="https://docs.google.com/spreadsheets/d/1DJaiTx__pM6QKsmumNknQjjZnhu-95-P_JaxUnuKOqM/edit?usp=sharing"){
   
   read_sheet(sh, sheet = subsh)
   
@@ -78,7 +77,8 @@ all_data[['publications']] <- get_publications(scholarid) %>%
 
 ```
 
-# Education 
+# Education
+
 ```{r}
 all_data %>%
   pluck("education") %>%
@@ -102,7 +102,6 @@ all_data %>%
 ```
 
 # Professional Experience
-
 
 ```{r jobs}
 all_data %>%
@@ -199,6 +198,7 @@ all_data[['publications']] %>%
 ```
 
 *Middle-author*
+
 ```{r mid author}
 all_data[['publications']] %>% 
   filter(!str_starts(author, "TM Tapera")) %>%
@@ -231,10 +231,10 @@ all_data %>%
 
 ```
 
-
 # Teaching Experience
 
 *Teaching Assistant*
+
 ```{r TAing}
 all_data %>%
   pluck("teaching") %>%
@@ -246,7 +246,9 @@ all_data %>%
     with=where
   )
 ```
+
 # Service
+
 ```{r}
 all_data %>%
   pluck("service") %>%
@@ -256,7 +258,6 @@ all_data %>%
     with=where
   )
 ```
-
 
 # Skills
 
