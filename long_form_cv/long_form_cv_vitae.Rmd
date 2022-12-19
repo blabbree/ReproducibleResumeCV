@@ -4,12 +4,13 @@ name: Brandon P.
 surname: Labbree
 position: "Research Technician Associate"
 address: "University of Michigan, Ann Arbor, MA"
-phone: +856 761 7029
+phone: +1 856 761 7029
 email: "blabbree@umich.edu"
 twitter: blabbree
 github: blabbree
 linkedin: blabbree
-orcid: "0000-0002-5893-4469"
+orcid: 0000-0002-5893-4469
+mastodon: "tech.lgbt/@blabbree"
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: "000000"
 aboutme: "I’m a PhD Student at Northeastern University, co-mentored by Varun Mishra and Stephen Intille. I study how to detect and intervene on mental health crises from personal devices like mobile phones and smart watches."
@@ -48,7 +49,7 @@ read_subsheet <- function(subsh, sh="https://docs.google.com/spreadsheets/d/1DJa
   
 }
   
-fields <- c("jobs", "education", "teaching", "service", "research", "software_n_projects", "skills")
+fields <- c("jobs", "education", "teaching", "service", "research", "skills")
 
 gs4_deauth()
 
@@ -214,22 +215,22 @@ all_data[['publications']] %>%
 
 ```
 
-# Software & Project Contributions
+<!-- # Software & Project Contributions -->
 
-```{r software}
-all_data %>%
-  pluck("software_n_projects") %>%
-  arrange(desc(year)) %>%
-  detailed_entries(
-    what=description, 
-    when=year, 
-    with=title, 
-    where=doi,
-    why = languages,
-    .protect = TRUE
-  )
+<!-- ```{r software} -->
+<!-- all_data %>% -->
+<!--   pluck("software_n_projects") %>% -->
+<!--   arrange(desc(year)) %>% -->
+<!--   detailed_entries( -->
+<!--     what=description,  -->
+<!--     when=year,  -->
+<!--     with=title,  -->
+<!--     where=doi, -->
+<!--     why = languages, -->
+<!--     .protect = TRUE -->
+<!--   ) -->
 
-```
+<!-- ``` -->
 
 # Teaching Experience
 
