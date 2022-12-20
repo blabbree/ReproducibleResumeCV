@@ -102,7 +102,7 @@ all_data %>%
   )
 ```
 
-# Professional Experience
+# Professional and Research Experience
 
 ```{r jobs}
 all_data %>%
