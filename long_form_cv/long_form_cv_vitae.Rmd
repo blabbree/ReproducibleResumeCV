@@ -65,7 +65,7 @@ all_data[['publications']] <- get_publications(scholarid) %>%
          journal = journal %>% 
            replace(journal %in% "bioRxiv", "BioRxiv"), 
          first_author = case_when(
-           str_starts(author, "TM Tapera") ~ TRUE, TRUE ~ FALSE
+           str_starts(author, "BP Labbree") ~ TRUE, TRUE ~ FALSE
            ),
          preprint = case_when(
            str_detect(journal, "PsyRxiv") ~ TRUE, TRUE ~ FALSE)
@@ -240,7 +240,7 @@ all_data[['publications']] %>%
 all_data %>%
   pluck("teaching") %>%
   #fill(-tasks) %>%
-  filter(role=="Teaching Assistant") %>%
+  #filter(role=="Teaching Assistant") %>%
   brief_entries(
     what=course,
     when=when,
