@@ -49,7 +49,7 @@ read_subsheet <- function(subsh, sh="https://docs.google.com/spreadsheets/d/1DJa
   
 }
   
-fields <- c("jobs", "education", "teaching", "service", "research", "skills")
+fields <- c("jobs", "education", "teaching", "service", "research", "skills","preprint")
 
 gs4_deauth()
 
@@ -74,6 +74,7 @@ all_data[['publications']] <- get_publications(scholarid) %>%
   mutate(authors = map(pubid, ~ get_publication_data_extended(scholarid, .x))) %>%
   unnest(authors) %>%
   rename(authors = Authors)
+  
 
 
 ```
@@ -130,7 +131,7 @@ all_data %>%
 <!-- all_data %>% -->
 <!--   pluck("research") %>% -->
 <!--   mutate(when = ifelse( -->
-<!--     !is.na(end_date), -->
+<!--     !is.na(end_date),  -->
 <!--     glue("{start_date} — {end_date}"), -->
 <!--     start_date)) %>% -->
 <!--   mutate( -->
@@ -180,35 +181,69 @@ parse_authors <- function(entry, max_len = 5, min_length = 4){
 
 # Publications
 
-*First-author*
+*Under Revision*
 
-```{r first author}
-all_data[['publications']] %>%
-  filter(str_starts(author, "BP Labbree")|str_starts(author,"B Labbree")) %>%
-  arrange(desc(year)) %>%
-  # mutate(author = parse_authors(author)) %>%
-  detailed_entries(
-    what=author, 
-    when=year, 
-    with=title, 
+```{r preprintRevision}
+all_data$preprint %>%
+   mutate(stage = factor(stage, levels = c("Under Revision","Under Review", "Submitted", "In Prep"),ordered = TRUE)
+   ) %>%
+   filter(str_detect(author, "BP Labbree") | str_detect(author, "B Labbree")) %>%
+    filter(stage == "Under Revision") %>%
+    arrange(desc(stage)) %>%
+   detailed_entries(
+    what=author,
+    when=stage,
+    with=title,
     where=journal,
     .protect = TRUE
   )
-
-
 ```
 
-*Middle-author*
+*Under Review*
 
-```{r mid author}
-all_data[['publications']] %>% 
-  filter(!str_starts(author, "TM Tapera")) %>%
+```{r preprintReview}
+all_data$preprint %>%
+   mutate(stage = factor(stage, levels = c("Under Revision","Under Review", "Submitted", "In Prep"),ordered = TRUE)
+   ) %>%
+   filter(str_detect(author, "BP Labbree") | str_detect(author, "B Labbree")) %>%
+    filter(stage == "Under Review") %>%
+    arrange(desc(stage)) %>%
+   detailed_entries(
+    what=author,
+    when=stage,
+    with=title,
+    where=journal,
+    .protect = TRUE
+  )
+```
+
+*Submitted*
+
+```{r preprintSubmit}
+all_data$preprint %>%
+   mutate(stage = factor(stage, levels = c("Under Revision","Under Review", "Submitted", "In Prep"),ordered = TRUE)
+   ) %>%
+   filter(str_detect(author, "BP Labbree") | str_detect(author, "B Labbree")) %>%
+    filter(stage == "Submitted") %>%
+    arrange(desc(stage)) %>%
+   detailed_entries(
+    what=author,
+    when=stage,
+    with=title,
+    where=journal,
+    .protect = TRUE
+  )
+```
+
+```{r  author}
+all_data[['publications']] %>%
+   filter(str_detect(author, "BP Labbree") | str_detect(author, "B Labbree")) %>%
   filter(!is.na(year)) %>%
   arrange(desc(year)) %>%
   detailed_entries(
-    what=author, 
-    when=year, 
-    with=title, 
+    what=author,
+    when=year,
+    with=title,
     where=journal,
     .protect = TRUE
   )
